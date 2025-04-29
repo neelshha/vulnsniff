@@ -30,12 +30,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (theme === 'dark') {
       root.classList.add('dark');
       root.classList.remove('light');
-      root.style.backgroundColor = '#000000';
+      root.style.backgroundColor = '#121212';
       root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
       root.classList.add('light');
-      root.style.backgroundColor = '#e5e5e5';
+      root.style.backgroundColor = '#f5f5f5';
       root.style.colorScheme = 'light';
     }
     localStorage.setItem('theme', theme);
