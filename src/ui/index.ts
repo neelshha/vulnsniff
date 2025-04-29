@@ -51,3 +51,6 @@ export * from '../components/HoverCard/HoverCard';
 
 // Popover
 export * from '../components/Popover/Popover';
+
+// Collapsible
+export * from '../components/Collapsible/Collapsible';
