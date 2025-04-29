@@ -1,0 +1,14 @@
+{
+  "name": "@nilui/react",
+  "version": "0.0.1",
+  "description": "React + TailwindCSS components for NilUI",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Neel Shah",
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0"
+}
