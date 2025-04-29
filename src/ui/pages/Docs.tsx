@@ -1,4 +1,3 @@
-import React from 'react';
 import { BookOpen, Code2, Settings, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';

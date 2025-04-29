@@ -1,4 +1,4 @@
-import { ArrowRight, Code, Palette, Zap } from 'lucide-react';
+import { Code, Palette, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const features = [

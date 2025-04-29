@@ -1,6 +1,3 @@
-import React from 'react';
-import { Github, Twitter, Mail } from 'lucide-react';
-
 export function Footer() {
   return (
     <footer className="bg-neutral-200 dark:bg-[#000000] border-t border-neutral-300 dark:border-neutral-700">

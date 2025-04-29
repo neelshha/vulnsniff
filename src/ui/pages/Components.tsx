@@ -31,7 +31,6 @@ import {
 } from '../../components/Tooltip/Tooltip';
 import { Progress } from '../../components/Progress/Progress';
 import { Switch } from '../../components/Switch/Switch';
-import { Slider } from '../../components/Slider/Slider';
 import { RadioGroup, RadioGroupItem } from '../../components/Radio/Radio';
 import { Toast, ToastTitle, ToastDescription } from '../../components/Toast/Toast';
 import { 
