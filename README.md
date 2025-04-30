@@ -1,122 +1,120 @@
-# VulnSniff
+# VulnSniff 🔍
 
-VulnSniff is a Chrome extension and companion proxy server that scans web pages for common vulnerabilities and provides AI-powered explanations and remediation steps using the GROQ AI API.
+**VulnSniff** is a Chrome extension and companion Node.js proxy server that scans websites for common vulnerabilities and provides instant AI-powered explanations and remediation steps using the GROQ LLM API.
 
-## Table of Contents
+> ✅ Now fully deployed — no local backend needed. Just load the extension and go.
 
-- [Architecture](#architecture)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Proxy Server](#running-the-proxy-server)
-  - [Loading the Chrome Extension](#loading-the-chrome-extension)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-## Architecture
+## 🌐 Live AI Proxy
 
-VulnSniff consists of two main components:
+> https://vulnsniff-proxy.onrender.com/api/explain
 
-1. **Chrome Extension** (`VULSNIFF-EXTENSION`):
-   - Injects a content script to detect basic web vulnerabilities (e.g., insecure headers, mixed content).
-   - Stores findings in Chrome local storage.
-   - Displays results in a popup (`popup.html`/`popup.js`) and fetches AI explanations from the proxy.
+This backend securely communicates with the GROQ API to return vulnerability explanations in plain English. It keeps your API key hidden from the frontend.
 
-2. **Proxy Server** (`groq-proxy-server`):
-   - A Node.js/Express server that forwards vulnerability data to the GROQ AI API.
-   - Keeps your `GROQ_API_KEY` secure on the server side.
+---
 
-## Features
-
-- Detects common web vulnerabilities like insecure headers, missing CSP, mixed content, etc.
-- AI-generated explanations with:
-  - **Severity** (Low/Medium/High)
-  - **Description** (non-technical overview)
-  - **Fix** (actionable remediation steps)
-- Lightweight and easy to load as a Chrome extension.
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or later)
-- npm or yarn
-- Google Chrome browser
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/VulnSniff.git
-   cd VulnSniff
-   ```
-
-2. Install proxy server dependencies:
-   ```bash
-   cd groq-proxy-server
-   npm install
-   ```
-
-3. Create a `.env` file in `groq-proxy-server` with your API key and (optional) port:
-   ```env
-   GROQ_API_KEY=your_groq_api_key_here
-   PORT=3001
-   ```
-
-### Running the Proxy Server
-
-From the `groq-proxy-server` directory:
-```bash
-npm start
-```
-The server will run on `http://localhost:3001` by default.
-
-### Loading the Chrome Extension
-
-1. Open Chrome and navigate to `chrome://extensions`.
-2. Enable **Developer mode** (toggle in the top right).
-3. Click **Load unpacked** and select the `VULSNIFF-EXTENSION` directory in this repo.
-4. Pin the VulnSniff icon to your toolbar for quick access.
-
-## Usage
-
-1. Visit any website you want to scan.
-2. Click the VulnSniff extension icon in your toolbar.
-3. View a list of detected vulnerabilities and AI-generated explanations in the popup.
-
-## Configuration
-
-- **Proxy Server (.env)**
-  - `GROQ_API_KEY`: Your GROQ AI API key for generating explanations.
-  - `PORT`: (Optional) Port on which the proxy server listens (default: 3001).
-
-## Project Structure
+## 📦 Project Structure
 
 ```
 VulnSniff/
-├── VULSNIFF-EXTENSION   # Chrome extension source code
-│   ├── assets/          # Icons and styles
-│   ├── contentScript.js # Detects vulnerabilities
-│   ├── background.js    # Background service worker
-│   ├── popup.html       # Extension UI
-│   ├── popup.js         # UI logic and AI calls
-│   ├── style.css        # Popup styling
-│   └── manifest.json    # Extension metadata
-└── groq-proxy-server    # Node.js proxy server
-    ├── groq-proxy.js    # Express server forwarding to GROQ API
-    ├── package.json     # Server dependencies & scripts
-    ├── .gitignore       # Ignore node_modules and .env files
-    └── .env.example     # Example environment variables (create this file)
+├── VULSNIFF-EXTENSION/      # Chrome Extension UI + logic
+│   ├── utils/groq.js        # Connects to hosted API
+│   ├── popup.js             # Displays results
+│   ├── contentScript.js     # Finds issues
+│   ├── manifest.json        # Chrome config
+│   └── ...                  # HTML, CSS, assets
+├── groq-proxy-server/       # Hosted proxy backend (Render)
+│   ├── groq-proxy.js
+│   ├── package.json
+│   ├── .gitignore
+│   └── .env (local only)
+└── README.md
 ```
 
-## Contributing
+---
 
-Contributions are welcome! Feel free to open issues or submit pull requests to enhance vulnerability detection, improve the UI, or add new features.
+## ⚙️ How It Works
 
-## License
+- **The extension** scans webpages for missing security headers or bad practices (e.g. CSP, X-Frame, HSTS).
+- **Findings are passed** to the backend (`/api/explain`).
+- **The backend** sends them to Groq’s AI model.
+- **A plain-English explanation** is returned (Severity, Description, Fix).
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. 
+---
+
+## 🚀 Quick Start
+
+### 🔧 1. Clone the repo
+
+```bash
+git clone https://github.com/neelshha/VulnSniff.git
+cd VulnSniff
+```
+
+### 🔌 2. Use the Hosted Proxy (No Setup Required)
+
+The extension is preconfigured to use the hosted endpoint:
+```
+https://vulnsniff-proxy.onrender.com/api/explain
+```
+
+No need to run any servers locally.
+
+---
+
+### 🧩 3. Load the Extension into Chrome
+
+1. Go to `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked**
+4. Select the folder: `VULSNIFF-EXTENSION/`
+5. Click the extension icon on any website to run a scan
+
+---
+
+## 🧠 Example Output
+
+```
+Severity: High
+Description: The site is missing a CSP header, making it vulnerable to XSS attacks.
+Fix: Add a Content-Security-Policy header to restrict allowed content sources.
+```
+
+---
+
+## 🔐 API & Security
+
+- The Groq API key is stored on the server only
+- The frontend never sees or leaks the key
+- `.env` is `.gitignored` and only used during local development
+
+---
+
+## 🧪 Development (Optional)
+
+To run the proxy locally:
+
+```bash
+cd groq-proxy-server
+npm install
+echo "GROQ_API_KEY=your_key" > .env
+node groq-proxy.js
+```
+
+Then update `groq.js` to use `http://localhost:3001/api/explain` if needed.
+
+---
+
+## 🤝 Contributing
+
+Open issues or PRs to:
+- Improve vulnerability detection
+- Add features (e.g., export, history, badge count)
+- Polish the UI or add animations
+
+---
+
+## 🪪 License
+
+MIT — free for personal and commercial use.
