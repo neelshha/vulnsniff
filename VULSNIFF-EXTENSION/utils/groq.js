@@ -1,6 +1,6 @@
 export async function explainIssueWithGroq(issue) {
   try {
-    const response = await fetch("http://localhost:3001/api/explain", {
+    const response = await fetch("https://vulnsniff-proxy.onrender.com/api/explain", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
