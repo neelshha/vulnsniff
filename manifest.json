@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "VulnSniff",
+    "version": "1.0",
+    "description": "Detects basic web vulnerabilities and explains them using AI.",
+    "permissions": [
+      "scripting",
+      "tabs",
+      "webRequest",
+      "storage"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "assets/icon.png",
+        "48": "assets/icon.png",
+        "128": "assets/icon.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["contentScript.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }
