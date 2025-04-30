@@ -20,7 +20,7 @@ VulnSniff is a Chrome extension that detects basic web vulnerabilities and provi
 ## Installation
 1. Clone or download this repository:
    ```bash
-   git clone https://github.com/yourusername/vulnsniff.git
+   git clone https://github.com/neelshha/VulnSniff.git
    cd vulnsniff
    ```
 2. Open Chrome and navigate to `chrome://extensions/`.
